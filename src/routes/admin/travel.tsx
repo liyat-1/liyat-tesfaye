@@ -48,7 +48,7 @@ function TravelEditor({ item, onClose, onSave, saving }: { item: Partial<TravelD
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0]; if (!f) return;
     setUploading(true);
-    try { setD((s) => ({ ...s, image_url: await uploadImage(f) })); }
+    try { const url = await uploadImage(f); setD((s) => ({ ...s, image_url: url })); }
     catch (err) { alert(err instanceof Error ? err.message : "Upload failed"); }
     finally { setUploading(false); }
   }

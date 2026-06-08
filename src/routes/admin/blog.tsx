@@ -51,7 +51,7 @@ function BlogEditor({ post, onClose, onSave, saving }: { post: Partial<BlogPost>
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0]; if (!f) return;
     setUploading(true);
-    try { setP((s) => ({ ...s, cover_image: await uploadImage(f) })); }
+    try { const url = await uploadImage(f); setP((s) => ({ ...s, cover_image: url })); }
     catch (err) { alert(err instanceof Error ? err.message : "Upload failed"); }
     finally { setUploading(false); }
   }
