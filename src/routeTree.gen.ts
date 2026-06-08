@@ -20,6 +20,10 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminTravelRouteImport } from './routes/admin/travel'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminProjectsRouteImport } from './routes/admin/projects'
+import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 
 const ResumeRoute = ResumeRouteImport.update({
   id: '/resume',
@@ -76,6 +80,26 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AdminTravelRoute = AdminTravelRouteImport.update({
+  id: '/travel',
+  path: '/travel',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProjectsRoute = AdminProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBlogRoute = AdminBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +111,10 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/interest': typeof InterestRoute
   '/resume': typeof ResumeRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/travel': typeof AdminTravelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -99,6 +127,10 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/interest': typeof InterestRoute
   '/resume': typeof ResumeRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/travel': typeof AdminTravelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -113,6 +145,10 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/interest': typeof InterestRoute
   '/resume': typeof ResumeRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/travel': typeof AdminTravelRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -128,6 +164,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/interest'
     | '/resume'
+    | '/admin/blog'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/travel'
     | '/blog/$slug'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -140,6 +180,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/interest'
     | '/resume'
+    | '/admin/blog'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/travel'
     | '/blog/$slug'
     | '/admin'
   id:
@@ -153,6 +197,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/interest'
     | '/resume'
+    | '/admin/blog'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/travel'
     | '/blog/$slug'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -248,14 +296,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/admin/travel': {
+      id: '/admin/travel'
+      path: '/travel'
+      fullPath: '/admin/travel'
+      preLoaderRoute: typeof AdminTravelRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/projects': {
+      id: '/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AdminProjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/blog': {
+      id: '/admin/blog'
+      path: '/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AdminBlogRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminBlogRoute: typeof AdminBlogRoute
+  AdminProjectsRoute: typeof AdminProjectsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminTravelRoute: typeof AdminTravelRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminBlogRoute: AdminBlogRoute,
+  AdminProjectsRoute: AdminProjectsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminTravelRoute: AdminTravelRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
